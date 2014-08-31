@@ -34,10 +34,10 @@ var rBot = {
 	},
 	user_cmd: {
 		theme: function(){
-			API.sendChat('Tout les styles de musiques sont autorisÃ©s sauf : La country, le classique et les sons Ã  caractÃ¨res racistes !');
+			API.sendChat('Tout les styles de musiques sont autorisés sauf : La country, le classique et les sons à caractères racistes !');
 		},
 		rules: function(){
-			API.sendChat('Voici les rÃ¨gles Ã  respecter : http://goo.gl/Arz6Ax');
+			API.sendChat('Voici les règles à respecter : http://goo.gl/Arz6Ax');
 		},
 		op: function(){
 			API.sendChat('Voici la liste des musiques interdites : http://goo.gl/eiRdQK');
@@ -49,7 +49,7 @@ var rBot = {
 			API.sendChat('Voici la liste des commandes : http://NaN.fr/')
 		},
 		adblock: function(){
-			API.sendChat('Voici l\'add-on adblock qui vous permet de bloquer les publicitÃ©s ! https://adblockplus.org/fr/firefox');
+			API.sendChat('Voici l\'add-on adblock qui vous permet de bloquer les publicités ! https://adblockplus.org/fr/firefox');
 		},
 		support: function(){
 			API.sendChat('Voici l\'adresse du support plug.dj : http://support.plug.dj/');
