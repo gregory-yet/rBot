@@ -91,7 +91,7 @@ var rBot = {
 			API.sendChat('[!emoji] Voici la liste des smileys : http://goo.gl/AKDkeo');
 		},
 		commands: function(){
-			API.sendChat('[!commands] Voici la liste des commandes : http://NaN.fr/');
+			API.sendChat('[!commands] Voici la liste des commandes : http://goo.gl/t43eFj');
 		},
 		adblock: function(){
 			API.sendChat('[!adblock] Voici l\'add-on adblock qui vous permet de bloquer les publicités ! https://adblockplus.org/fr/');
@@ -122,13 +122,13 @@ var rBot = {
 		dc: function(id){
 			if(rBot.users.getDc(id)){
 				if((Date.now() - rBot.users.getDc(id).time) < 600000){
-					API.sendChat('Voici ton ancienne place lors de la déconnexion : ' + rBot.users.getDc(id).wList);
+					API.sendChat('[!dc] Voici ton ancienne place lors de la déconnexion : ' + rBot.users.getDc(id).wList);
 					API.moderateAddDJ(id);
 					setTimeout(function(){API.moderateMoveDJ(id, rBot.users.getDc(id).wList);}, 1000);
 				}
 			}
 			else{
-				API.sendChat('Je ne t\'ai pas vu te déconnecter !');
+				API.sendChat('[!dc] Je ne t\'ai pas vu te déconnecter !');
 			}
 		}
 	},
