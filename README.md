@@ -49,4 +49,5 @@ SOFTWARE.
 ```
 
 Vous pouvez donc modifier, améliorer ce script, tout en laissant obligatoirement le copyright (WAYZ) ainsi que la commande !dev
+
 So, you can update, fix the script, but you must let the copyright (WAYZ) and the command !dev
