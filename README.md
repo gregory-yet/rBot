@@ -47,3 +47,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+Vous pouvez donc modifier, améliorer ce script, tout en laissant obligatoirement le copyright (WAYZ) ainsi que la commande !dev
+So, you can update, fix the script, but you must let the copyright (WAYZ) and the command !dev
