@@ -4,7 +4,7 @@ rBot
 Description
 ----
 
-Bot officiel de la room [RealityGamingFR](https://plug.dj/realitygamingfr), développé par WAYZ. Pour pouvoir utiliser ce bot vous devez être minimum Manager !
+Bot officiel de la room [RealityGamingFR](https://plug.dj/realitygaming), développé par WAYZ. Pour pouvoir utiliser ce bot vous devez être minimum Manager !
 
 Commandes
 ----
