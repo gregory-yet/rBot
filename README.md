@@ -18,7 +18,6 @@ __!emoji__ | _Aucun_ | Envoie les smileys disponible de plug.dj | User
 __!commands__ | _Aucun_ | Envoie les commandes de rBot | User
 __!adblock__ | _Aucun_ | Envoie le lien de adblock | User
 __!support__| _Aucun_ | Envoie le lien du support de plug.dj | User
-__!tuto__| _Aucun_ | Envoie le lien du tutoriel plug.dj en image | User
 __!pic__ | _Aucun_ | Envoie l'image de la vidéo en cours de lecture | User
 __!link__ | _Aucun_ | Envoie le lien de la musique en cours de lecture | User
 __!dc__ | _Aucun_ | Si vous avez été déconnecté, cette commande vous remettra à votre place lors de la déconnexion | User
@@ -27,6 +26,8 @@ __!cookie__ | _Utilisateur_ | Envoie un cookie à l'utilisateur choisi | User
 __!kiss__ | _Utilisateur_ | Envoie un bisous à l'utilisateur choisi | User
 __---__ | _---_ | --- | ---
 __!rdj__ | _Aucun_ | Envoie comment être Resident DJ | RDJ
+__!tuto__| _Aucun_ | Envoie le lien du tutoriel plug.dj en image | RDJ
+__!lothelp__| _Aucun_ | Explique le jeu de la loterie | RDJ
 
 License
 ----
