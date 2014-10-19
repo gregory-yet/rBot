@@ -126,6 +126,7 @@ var rBot = {
 					var id = u[i].id;
 					API.sendChat('[!kick] [' + un + '] a kick ' + username + ' de la room !');
 					setTimeout(function(){API.moderateBanUser(id, 0, -1);}, 1000);
+					$('#users-button').click();$('.button.bans').click();setTimeout(function(){ $('.button.room').click(); $('#chat-button').click();}, 100);
 					setTimeout(function(){API.moderateUnbanUser(id);}, 3000);
 				}
 			}
