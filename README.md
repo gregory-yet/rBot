@@ -35,6 +35,7 @@ __!unlock__ | _Aucun_ | Débloque la waitlist | Bouncer
 __!remove__ | _Utilisateur_ | Retire une personne de la waitlist | Bouncer
 __!add__ | _Utilisateur_ | Ajoute une personne dans la waitlist | Bouncer
 __!move__ | _Utilisateur, Position_ | Déplace une personne à la postion précisée | Bouncer
+__!kick__ | _Utilisateur_ | Expulse la personne de la salle | Bouncer
 
 License
 ----
