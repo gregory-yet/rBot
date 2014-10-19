@@ -29,6 +29,8 @@ __!staff__ | _Aucun_ | Eexplique comment être staff | RDJ
 __!tuto__| _Aucun_ | Envoie le lien du tutoriel plug.dj en image | RDJ
 __!lothelp__| _Aucun_ | Explique le jeu de la loterie | RDJ
 __!dev__ | _Aucun_ | Envoie le créateur du rBot | RDJ
+__---__ | _---_ | --- | ---
+__!skip__ | _option: position_ | Passe la musique, et si précisée, replace le DJ dans la waitlist à la position précisée | Bouncer
 
 License
 ----
