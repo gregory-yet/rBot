@@ -24,9 +24,11 @@ __!dc__ | _Aucun_ | Si vous avez été déconnecté, cette commande vous remettr
 __!cookie__ | _Utilisateur_ | Envoie un cookie à l'utilisateur choisi | User
 __!kiss__ | _Utilisateur_ | Envoie un bisous à l'utilisateur choisi | User
 __---__ | _---_ | --- | ---
-__!rdj__ | _Aucun_ | Envoie comment être Resident DJ | RDJ
+__!rdj__ | _Aucun_ | Explique comment être Resident DJ | RDJ
+__!staff__ | _Aucun_ | Eexplique comment être staff | RDJ
 __!tuto__| _Aucun_ | Envoie le lien du tutoriel plug.dj en image | RDJ
 __!lothelp__| _Aucun_ | Explique le jeu de la loterie | RDJ
+__!dev__ | _Aucun_ | Envoie le créateur du rBot | RDJ
 
 License
 ----
