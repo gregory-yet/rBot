@@ -11,6 +11,7 @@ Commandes
 
 Commande          | Attribut          | Description | Grade
 ----------------- | ----------------- | ----------- | ------
+__!theme__ | _Aucun_ | Test si le bot marche ou non | User
 __!theme__ | _Aucun_ | Envoie le thème de la room | User
 __!rules__ | _Aucun_ | Envoie les règles de la room | User
 __!op__ | _Aucun_ | Envoie les musiques interdites de la room | User
@@ -36,6 +37,10 @@ __!remove__ | _Utilisateur_ | Retire une personne de la waitlist | Bouncer
 __!add__ | _Utilisateur_ | Ajoute une personne dans la waitlist | Bouncer
 __!move__ | _Utilisateur, Position_ | Déplace une personne à la postion précisée | Bouncer
 __!kick__ | _Utilisateur_ | Expulse la personne de la salle | Bouncer
+__!mute__ | _Utilisateur_ | Mute la personne pendant 15 minutes | Bouncer
+__!unmute__ | _Utilisateur_ | Unmute la personne | Bouncer
+__!guideline__ | _Aucun_ | Envoie le lien de la guideline du staff | Bouncer
+__!jointime__ | _Utilisateur_ | Envoie depuis combien de temps l'utilisateur est connecté | Bouncer
 
 License
 ----
