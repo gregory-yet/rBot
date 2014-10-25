@@ -18,6 +18,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+// User selection is with @[username] eg: @WAYZ instead of WAYZ
+
 */
 
 var rBot = {
@@ -76,6 +79,8 @@ var rBot = {
 	},
 	bouncer_cmd: {
 		skip: function(un, position){
+			var un = data.un;
+			var position = data.message.split(' ')[1];
 			API.sendChat('[!skip] [' + un + '] a passé la musique !');
 			var current_dj = API.getDJ().id;
 			if(position < 50){
@@ -87,11 +92,14 @@ var rBot = {
 				API.moderateForceSkip();
 			}
 		},
-		unlock: function(un){
+		unlock: function(data){
+			var un = data.un;
 			API.sendChat('[!unlock] [' + un + '] a débloqué la waitlist !');
 			API.moderateLockWaitList(false, false);
 		},
-		remove: function(un, unt){
+		remove: function(data){
+			var un = data.un;
+			var unt = data.message.split(' ')[1].substr(1);
 			var wl = API.getWaitList();
 			for(var i in wl){
 				if(wl[i].username == unt){
@@ -100,7 +108,9 @@ var rBot = {
 				}
 			}
 		},
-		add: function(un, unt){
+		add: function(data){
+			var un = data.un;
+			var unt = data.message.split(' ')[1].substr(1);
 			var u = API.getUsers();
 			for(var i in u){
 				if(u[i].username == unt){
@@ -109,7 +119,10 @@ var rBot = {
 				}
 			}
 		},
-		move: function(un, unt, position){
+		move: function(data){
+			var un = data.un;
+			var unt = data.message.split(' ')[1].substr(1);
+			var position = data.message.split(' ')[2];
 			var u = API.getUsers();
 			for(var i in u){
 				if(u[i].username == unt && position < 50){
@@ -118,7 +131,9 @@ var rBot = {
 				}
 			}
 		},
-		kick: function(un, unt){
+		kick: function(data){
+			var un = data.un;
+			var unt = data.message.split(' ')[1].substr(1);
 			var u = API.getUsers();
 			for(var i in u){
 				if(u[i].username == unt){
@@ -133,52 +148,66 @@ var rBot = {
 		}
 	},
 	rdj_cmd: {
-		rdj: function(un){
+		rdj: function(data){
+			var un = data.un;
 			API.sendChat('[!rdj] [' + un + '] Pour devenir Resident DJ, il faut passer des musiques appréciées par la communauté, vous serez prévenu par un membre du staff');
 		},
-		staff: function(un){
+		staff: function(data){
+			var un = data.un;
 			API.sendChat('[!staff] [' + un + '] Pour devenir staff, il faut respecter les règles, être sérieux mais aussi détendu, et surtout être actif ! Vous serez prévenu par un membre du staff :)');
 		},
-		tuto: function(un){
+		tuto: function(data){
+			var un = data.un;
 			API.sendChat('[!tuto] [' + un + '] Voici une explication de plug.dj en une image : http://i.imgur.com/et4qYhs.jpg');
 		},
-		lothelp: function(un){
+		lothelp: function(data){
+			var un = data.un;
 			API.sendChat('[!lothelp] [' + un + '] La loterie est un jeu qui permet de booster une personne en première position dans la liste d\'attente, aléatoirement. Si vous gagnez, tapez !loterie');
 		},
-		dev: function(un){
+		dev: function(data){
+			var un = data.un;
 			API.sendChat('[!dev] [' + un + '] Le développeur de ce bot est : WAYZ');
 		}
 	},
 	user_cmd: {
-		theme: function(un){
+		theme: function(data){
+			var un = data.un;
 			API.sendChat('[!theme] [' + un + '] Tout les styles de musiques sont autorisés sauf : La country, le troll, le classique et les sons à caractères racistes !');
 		},
-		rules: function(un){
+		rules: function(data){
+			var un = data.un;
 			API.sendChat('[!rules] [' + un + '] Voici les règles à respecter : http://goo.gl/Arz6Ax');
 		},
-		op: function(un){
+		op: function(data){
+			var un = data.un;
 			API.sendChat('[!op] [' + un + '] Voici la liste des musiques interdites : http://goo.gl/eiRdQK');
 		},
-		emoji: function(un){
+		emoji: function(data){
+			var un = data.un;
 			API.sendChat('[!emoji] [' + un + '] Voici la liste des smileys : http://goo.gl/AKDkeo');
 		},
-		commands: function(un){
+		commands: function(data){
+			var un = data.un;
 			API.sendChat('[!commands] [' + un + '] Voici la liste des commandes : http://goo.gl/t43eFj');
 		},
-		adblock: function(un){
+		adblock: function(data){
+			var un = data.un;
 			API.sendChat('[!adblock] [' + un + '] Voici l\'add-on adblock qui vous permet de bloquer les publicités ! https://adblockplus.org/fr/');
 		},
-		support: function(un){
+		support: function(data){
+			var un = data.un;
 			API.sendChat('[!support] [' + un + '] Voici l\'adresse du support plug.dj : http://support.plug.dj/');
 		},
-		pic: function(un){
+		pic: function(data){
+			var un = data.un;
 			var media = API.getMedia();
 			if(media.format === 1){
 				var link = "http://i.ytimg.com/vi/" + media.cid + "/maxresdefault.jpg";
 				API.sendChat('[!pic] [' + un + '] Voici le lien de l\'image : ' + link);
 			}
 		},
-		link: function(un){
+		link: function(data){
+			var un = data.un;
 			var media = API.getMedia();
 			if(media.format === 1){
 				var base = "http://youtube.com/watch?v=";
@@ -191,7 +220,9 @@ var rBot = {
 				});
 			}
 		},
-		dc: function(id, un){
+		dc: function(data){
+			var id = data.uid;
+			var un = data.un;
 			if(rBot.users.getDc(id)){
 				if((Date.now() - rBot.users.getDc(id).time) < 600000){
 					API.sendChat('[!dc] [' + un + '] Voici ton ancienne place lors de la déconnexion : ' + rBot.users.getDc(id).wList);
@@ -204,10 +235,12 @@ var rBot = {
 			}
 		},
 		cookie: function(un, unt){
-			API.sendChat('[!cookie] [' + unt + '] @' + un + ' vous a envoyé un cookie !');
+			var un = data.un;
+			var unt = data.message.split(' ')[1].substr(1);
+			API.sendChat('[!cookie] [' + un + '] @' + unt + ' vous a envoyé un cookie !');
 		},
 		kiss: function(un, unt){
-			API.sendChat('[!kiss] [' + unt + '] @' + un + ' vous a envoyé un bisous !');
+			API.sendChat('[!kiss] [' + un + '] @' + unt + ' vous a envoyé un bisous !');
 		}
 		// Cookie
 		// Kiss
@@ -222,158 +255,93 @@ var rBot = {
 		});
 		API.on(API.CHAT, function(data){
 			if(data.message.indexOf('!') == 0){
-				var cmds = data.message.split(' ');
-				if(cmds.length == 1){
-					var cmd = cmds[0];
-					switch(cmd){
-						// user_cmd
-						case '!ping':
-							API.moderateDeleteChat(data.cid);
-							API.sendChat('[!ping] [' + data.un + '] Pong !');
-							break;
-						case '!theme':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.theme(data.un);
-							break;
-						case '!rules':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.rules(data.un);
-							break;
-						case '!op':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.op(data.un);
-							break;
-						case '!emoji':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.emoji(data.un);
-							break;
-						case '!commands':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.commands(data.un);
-							break;
-						case '!adblock':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.adblock(data.un);
-							break;
-						case '!support':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.support(data.un);
-							break;
-						case '!pic':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.pic(data.un);
-							break;
-						case '!link':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.link(data.un);
-							break;
-						case '!dc':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.dc(data.uid, data.un);
-							break;
-
-						// rdj_cmd
-						case '!rdj':
-							if(API.hasPermission(data.uid, API.ROLE.DJ)){
-								API.moderateDeleteChat(data.cid);
-								rBot.rdj_cmd.rdj(data.un);
-							}
-							break;
-						case '!staff':
-							if(API.hasPermission(data.uid, API.ROLE.DJ)){
-								API.moderateDeleteChat(data.cid);
-								rBot.rdj_cmd.staff(data.un);
-							}
-							break;
-						case '!tuto':
-							if(API.hasPermission(data.uid, API.ROLE.DJ)){
-								API.moderateDeleteChat(data.cid);
-								rBot.rdj_cmd.tuto(data.un);
-							}
-							break;
-						case '!lothelp':
-							if(API.hasPermission(data.uid, API.ROLE.DJ)){
-								API.moderateDeleteChat(data.cid);
-								rBot.rdj_cmd.lothelp(data.un);
-							}
-							break;
-						case '!dev':
-							if(API.hasPermission(data.uid, API.ROLE.DJ)){
-								API.moderateDeleteChat(data.cid);
-								rBot.rdj_cmd.dev(data.un);
-							}
-							break;
-
-						// bouncer_cmd
-						case '!unlock':
-							if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
-								API.moderateDeleteChat(data.cid);
-								rBot.bouncer_cmd.unlock(data.un);
-							}
-							break;
-						default:
-							API.moderateDeleteChat(data.cid);
-							break;
+				var cmds = data.message.split(' '),
+				obj = {
+					un: data.un,
+					uid: data.uid,
+					cid: data.cid,
+					role: API.getUser(data.uid).role,
+					grole: API.getUser(data.uid).grole,
+					level: API.getUser(data.uid).level,
+					type: data.type,
+					message: data.message
+				},cdt=1,cd=false;
+				if(obj.role < 1){
+					if(rBot.user_cmd[cmds[0].toLowerCase()] && (!cd)){
+						rBot.user_cmd[cmds[0].toLowerCase()](obj);
 					}
+					if(!cd){
+						cd = true;
+						setTimeout(function{
+							cd = false;
+						}, cd*1000);
+					}else API.sendChat('['+obj.un+'] ['+cmds[0]+'] Commande invalide!');
+				}else if(obj.role < 2){
+					if(rBot.user_cmd[cmds[0].toLowerCase()]){
+						rBot.user_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.rdj_cmd[cmds[0].toLowerCase()]){
+						rBot.rdj_cmd[cmds[0].toLowerCase()](obj);
+					}else API.sendChat('['+obj.un+'] ['+cmds[0]+'] Commande invalide!');
+				}else if(obj.role < 3){
+					if(rBot.user_cmd[cmds[0].toLowerCase()]){
+						rBot.user_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.rdj_cmd[cmds[0].toLowerCase()]){
+						rBot.rdj_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.bouncer_cmd[cmds[0].toLowerCase()]){
+						rBot.bouncer_cmd[cmds[0].toLowerCase()](obj);
+					}else API.sendChat('['+obj.un+'] ['+cmds[0]+'] Commande invalide!');
+				}else if(obj.role < 4){
+					if(rBot.user_cmd[cmds[0].toLowerCase()]){
+						rBot.user_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.rdj_cmd[cmds[0].toLowerCase()]){
+						rBot.rdj_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.bouncer_cmd[cmds[0].toLowerCase()]){
+						rBot.bouncer_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.manager_cmd[cmds[0].toLowerCase()]){
+						rBot.manager_cmd[cmds[0].toLowerCase()](obj);
+					}else API.sendChat('['+obj.un+'] ['+cmds[0]+'] Commande invalide!');
+				}else if(obj.role < 5){
+					if(rBot.user_cmd[cmds[0].toLowerCase()]){
+						rBot.user_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.rdj_cmd[cmds[0].toLowerCase()]){
+						rBot.rdj_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.bouncer_cmd[cmds[0].toLowerCase()]){
+						rBot.bouncer_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.manager_cmd[cmds[0].toLowerCase()]){
+						rBot.manager_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.cohost_cmd[cmds[0].toLowerCase()]){
+						rBot.cohost_cmd[cmds[0].toLowerCase()](obj);
+					}else API.sendChat('['+obj.un+'] ['+cmds[0]+'] Commande invalide!');
 				}
-				else if(cmds.length == 2){
-					var cmd = cmds[0];
-					var attr = cmds[1];
-					switch(cmd){
-						// user_cmd
-						case '!cookie':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.cookie(data.un, cmds[1]);
-							break;
-						case '!kiss':
-							API.moderateDeleteChat(data.cid);
-							rBot.user_cmd.kiss(data.un, cmds[1]);
-							break;
-
-						// bouncer_cmd
-						case '!skip':
-							if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
-								API.moderateDeleteChat(data.cid);
-								rBot.bouncer_cmd.skip(data.un, cmds[1]);
-							}
-							break;
-						case '!remove':
-							if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
-								API.moderateDeleteChat(data.cid);
-								rBot.bouncer_cmd.remove(data.un, cmds[1]);
-							}
-							break;
-						case '!add':
-							if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
-								API.moderateDeleteChat(data.cid);
-								rBot.bouncer_cmd.add(data.un, cmds[1]);
-							}
-							break;
-						case '!kick':
-							if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
-								API.moderateDeleteChat(data.cid);
-								rBot.bouncer_cmd.kick(data.un, cmds[1]);
-							}
-							break;
-						default:
-							API.moderateDeleteChat(data.cid);
-							break;
+				else if(obj.role === 5){
+					if(rBot.user_cmd[cmds[0].toLowerCase()]){
+						rBot.user_cmd[cmds[0].toLowerCase()](obj);
 					}
-				}
-				else if(cmds.length == 3){
-					var cmd = cmds[0];
-					var attr = cmds[1];
-					var attr2 = cmds[2];
-					switch(cmd){
-						// bouncer_cmd
-						case '!move':
-							API.moderateDeleteChat(data.cid);
-							rBot.bouncer_cmd.move(data.un, cmds[1], cmds[2]);
-							break;
-						default:
-							API.moderateDeleteChat(data.cid);
-							break;
+					else if(rBot.rdj_cmd[cmds[0].toLowerCase()]){
+						rBot.rdj_cmd[cmds[0].toLowerCase()](obj);
 					}
+					else if(rBot.bouncer_cmd[cmds[0].toLowerCase()]){
+						rBot.bouncer_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.manager_cmd[cmds[0].toLowerCase()]){
+						rBot.manager_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.cohost_cmd[cmds[0].toLowerCase()]){
+						rBot.cohost_cmd[cmds[0].toLowerCase()](obj);
+					}
+					else if(rBot.host_cmd[cmds[0].toLowerCase()]){
+						rBot.host_cmd[cmds[0].toLowerCase()](obj);
+					}else API.sendChat('['+obj.un+'] ['+cmds[0]+'] Commande invalide!');
 				}
 			}
 			else if(data.message.indexOf('@') !=-1){
