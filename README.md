@@ -11,7 +11,7 @@ Commandes
 
 Commande          | Attribut          | Description | Grade
 ----------------- | ----------------- | ----------- | ------
-__!theme__ | _Aucun_ | Test si le bot marche ou non | User
+__!ping__ | _Aucun_ | Test si le bot marche ou non | User
 __!theme__ | _Aucun_ | Envoie le thème de la room | User
 __!rules__ | _Aucun_ | Envoie les règles de la room | User
 __!op__ | _Aucun_ | Envoie les musiques interdites de la room | User
@@ -24,6 +24,7 @@ __!link__ | _Aucun_ | Envoie le lien de la musique en cours de lecture | User
 __!dc__ | _Aucun_ | Si vous avez été déconnecté, cette commande vous remettra à votre place lors de la déconnexion | User
 __!cookie__ | _Utilisateur_ | Envoie un cookie à l'utilisateur choisi | User
 __!kiss__ | _Utilisateur_ | Envoie un bisous à l'utilisateur choisi | User
+__!eta__ | _Aucun_ | Envoie le temps restant pour devenir le DJ | User
 __---__ | _---_ | --- | ---
 __!rdj__ | _Aucun_ | Explique comment être Resident DJ | RDJ
 __!staff__ | _Aucun_ | Eexplique comment être staff | RDJ
@@ -35,12 +36,15 @@ __!skip__ | _option: Position_ | Passe la musique, et si précisée, replace le 
 __!unlock__ | _Aucun_ | Débloque la waitlist | Bouncer
 __!remove__ | _Utilisateur_ | Retire une personne de la waitlist | Bouncer
 __!add__ | _Utilisateur_ | Ajoute une personne dans la waitlist | Bouncer
-__!move__ | _Utilisateur, Position_ | Déplace une personne à la postion précisée | Bouncer
 __!kick__ | _Utilisateur_ | Expulse la personne de la salle | Bouncer
 __!mute__ | _Utilisateur_ | Mute la personne pendant 15 minutes | Bouncer
 __!unmute__ | _Utilisateur_ | Unmute la personne | Bouncer
 __!guideline__ | _Aucun_ | Envoie le lien de la guideline du staff | Bouncer
 __!jointime__ | _Utilisateur_ | Envoie depuis combien de temps l'utilisateur est connecté | Bouncer
+__---__ | _---_ | --- | ---
+__!move__ | _Utilisateur, Position_ | Déplace une personne à la postion précisée | Manager
+__!kill__ | _Aucun_ | Désactive le bot | Manager
+__!reload__ | _Aucun_ | Recharge le bot | Manager
 
 License
 ----
