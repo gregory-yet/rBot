@@ -90,6 +90,15 @@ var rBot = {
 			API.off(API.CHAT);
 			API.off(API.ADVANCE);
 			rBot = {};
+		},
+		reload: function(un){
+			API.sendChat('[!reload] [' + un + '] a rechargé le bot ! :warning:');
+			API.off(API.USER_JOIN);
+			API.off(API.USER_LEAVE);
+			API.off(API.CHAT);
+			API.off(API.ADVANCE);
+			rBot = {};
+			setTimeout(function(){$.getScript('https://cdn.rawgit.com/WayzRG/rBot/master/rBot.js');}, 500);
 		}
 	},
 	bouncer_cmd: {
@@ -458,7 +467,12 @@ var rBot = {
 					case '!kill':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
-							rBot.manager_cmd.kill();
+							rBot.manager_cmd.kill(data.un);
+						}
+					case '!reload':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.reload(data.un);
 						}
 					break;
 
@@ -481,7 +495,7 @@ var rBot = {
 		API.on(API.ADVANCE, function(){
 			var u = rBot.users.listUser;
 			for(var i in u){
-				u[i].wList = API.getWaitListPosition(id) == -1 ? API.getWaitListPosition(id) : API.getWaitListPosition(id) + 1;
+				u[i].wList = API.getWaitListPosition(u[i].id) == -1 ? API.getWaitListPosition(u[i].id) : API.getWaitListPosition(u[i].id) + 1;
 			}
 		});
 	},
