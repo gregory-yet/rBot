@@ -98,7 +98,7 @@ var rBot = {
 			API.off(API.CHAT);
 			API.off(API.ADVANCE);
 			rBot = {};
-			setTimeout(function(){$.getScript('https://cdn.rawgit.com/WayzRG/rBot/master/rBot.js');}, 500);
+			setTimeout(function(){$.getScript('https://rawgit.com/WayzRG/rBot/master/rBot.js');}, 500);
 		},
 		clearchat: function(un){
 			var msg = $('div#chat-messages').children('div');
@@ -108,7 +108,18 @@ var rBot = {
 					rBot.deleteChat(cid);
 				}
 			}
-			API.sendChat('[!clearchat] [' + un + '] a supprimé tout les messages ! :warning:');
+			API.sendChat('[!clearchat] [' + un + '] a supprimé tout les messages du chat ! :warning:');
+		},
+		ban: function(un, unt){
+			var u = API.getUsers();
+			for(var i in u){
+				if(u[i].username == unt){
+					var username = u[i].username;
+					var id = u[i].id;
+					API.sendChat('[!mute] [' + un + '] a mute ' + username + ' pendant 15 minutes !');
+					API.moderateBanUser(id, 1, API.BAN.HOUR);
+				}
+			}
 		}
 	},
 	bouncer_cmd: {
@@ -383,31 +394,31 @@ var rBot = {
 						if(API.hasPermission(data.uid, API.ROLE.DJ)){
 							rBot.deleteChat(data.cid);
 							rBot.rdj_cmd.rdj(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!staff':
 						if(API.hasPermission(data.uid, API.ROLE.DJ)){
 							rBot.deleteChat(data.cid);
 							rBot.rdj_cmd.staff(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!tuto':
 						if(API.hasPermission(data.uid, API.ROLE.DJ)){
 							rBot.deleteChat(data.cid);
 							rBot.rdj_cmd.tuto(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!lothelp':
 						if(API.hasPermission(data.uid, API.ROLE.DJ)){
 							rBot.deleteChat(data.cid);
 							rBot.rdj_cmd.lothelp(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!dev':
 						if(API.hasPermission(data.uid, API.ROLE.DJ)){
 							rBot.deleteChat(data.cid);
 							rBot.rdj_cmd.dev(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 
 
@@ -416,55 +427,55 @@ var rBot = {
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.unlock(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!skip':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.skip(data.un, attr);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!remove':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.remove(data.un, attr);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!add':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.add(data.un, attr);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!kick':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.kick(data.un, attr);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!mute':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.mute(data.un, attr);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!unmute':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.unmute(data.un, attr);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!guideline':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.guideline(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!jointime':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
 							rBot.bouncer_cmd.jointime(data.un, attr);
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 
 					// manager_cmd
@@ -472,23 +483,28 @@ var rBot = {
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.move(data.un, attr.substr(0, attr.length - 1).trim(), attr.substr(attr.length - 1).trim());
-						}
+						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!kill':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.kill(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 					case '!reload':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.reload(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
 					case '!clearchat':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.clearchat(data.un);
-						}
+						} else { rBot.deleteChat(data.cid); }
+					case '!ban':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.ban(data.un, attr);
+						} else { rBot.deleteChat(data.cid); }
 					break;
 
 					default:
