@@ -99,6 +99,16 @@ var rBot = {
 			API.off(API.ADVANCE);
 			rBot = {};
 			setTimeout(function(){$.getScript('https://cdn.rawgit.com/WayzRG/rBot/master/rBot.js');}, 500);
+		},
+		clearchat: function(un){
+			var msg = $('div#chat-messages').children('div');
+			for(var i in msg){
+				if(msg.eq(i).data('cid')){
+					cid = msg.eq(i).data('cid');
+					rBot.deleteChat(cid);
+				}
+			}
+			API.sendChat('[!clearchat] [' + un + '] a supprimé tout les messages ! :warning:');
 		}
 	},
 	bouncer_cmd: {
@@ -473,6 +483,11 @@ var rBot = {
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.reload(data.un);
+						}
+					case '!clearchat':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.clearchat(data.un);
 						}
 					break;
 
