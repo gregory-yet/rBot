@@ -45,6 +45,8 @@ __---__ | _---_ | --- | ---
 __!move__ | _Utilisateur, Position_ | Déplace une personne à la postion précisée | Manager
 __!kill__ | _Aucun_ | Désactive le bot | Manager
 __!reload__ | _Aucun_ | Recharge le bot | Manager
+__!clearchat__ | _Aucun_ | Supprime tout les messages du chat | Manager
+__!ban__ | _Utilisateur_ | Ban la personne | Manager
 
 License
 ----
