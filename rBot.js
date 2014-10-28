@@ -518,17 +518,20 @@ var rBot = {
 					case '!grab':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
-							rBot.manager_cmd.grab(data.un);
+							// rBot.manager_cmd.grab(data.un);
+							API.chatLog('!grab');
 						} else { rBot.deleteChat(data.cid); }
 					case '!join':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
-							rBot.manager_cmd.join(data.un);
+							// rBot.manager_cmd.join(data.un);
+							API.chatLog('!join');
 						} else { rBot.deleteChat(data.cid); }
 					case '!leave':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
-							rBot.manager_cmd.leave(data.un);
+							// rBot.manager_cmd.leave(data.un);
+							API.chatLog('!leave');
 						} else { rBot.deleteChat(data.cid); }
 					break;
 
