@@ -29,7 +29,7 @@ __!eta__ | _Aucun_ | Envoie le temps restant pour devenir le DJ | User
 Commande          | Attribut          | Description | Grade
 ----------------- | ----------------- | ----------- | ------
 __!rdj__ | _Aucun_ | Explique comment être Resident DJ | RDJ
-__!staff__ | _Aucun_ | Eexplique comment être staff | RDJ
+__!staff__ | _Aucun_ | Explique comment être staff | RDJ
 __!tuto__| _Aucun_ | Envoie le lien du tutoriel plug.dj en image | RDJ
 __!lothelp__| _Aucun_ | Explique le jeu de la loterie | RDJ
 __!dev__ | _Aucun_ | Envoie le créateur du rBot | RDJ
