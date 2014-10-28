@@ -225,7 +225,7 @@ var rBot = {
 						API.moderateBanUser(idt, 1, API.BAN.HOUR);
 					}
 					else {
-						API.sendCHat('[!ban] [' + un + '] Tu n\'as pas les droits requis pour ban ' + u[i].username + ' !')
+						API.sendChat('[!ban] [' + un + '] Tu n\'as pas les droits requis pour ban ' + u[i].username + ' !')
 					}
 				}
 			}
