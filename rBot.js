@@ -495,7 +495,7 @@ var rBot = {
 					case '!ban':
 						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
 							rBot.deleteChat(data.cid);
-							rBot.manager_cmd.ban(data.un, data.uid, attr);
+							rBot.bouncer_cmd.ban(data.un, data.uid, attr);
 						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!bot':
