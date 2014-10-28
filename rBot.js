@@ -119,6 +119,9 @@ var rBot = {
 		leave: function(un){
 			API.sendChat('[!leave] [' + un + '] m\'a retiré dans la waitlist !');
 			API.djLeave();
+		},
+		bot: function(un, message){
+			API.sendChat('[!bot] [' + un + '] :warning: ' + message + ' :warning:')
 		}
 	},
 	bouncer_cmd: {
@@ -548,7 +551,7 @@ var rBot = {
 							rBot.manager_cmd.bot(data.un, attr);
 						} else { rBot.deleteChat(data.cid); }
 						break;
-						
+
 					default:
 						rBot.deleteChat(data.cid);
 						break;
