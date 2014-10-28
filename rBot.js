@@ -121,7 +121,7 @@ var rBot = {
 			API.djLeave();
 		},
 		bot: function(un, message){
-			API.sendChat('[!bot] [' + un + '] :warning: ' + message + ' :warning:')
+			API.sendChat('[!bot] [' + un + '] :warning: ' + message + ' :warning:');
 		}
 	},
 	bouncer_cmd: {
@@ -546,7 +546,7 @@ var rBot = {
 						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!bot':
-						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.bot(data.un, attr);
 						} else { rBot.deleteChat(data.cid); }
