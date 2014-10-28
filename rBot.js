@@ -70,9 +70,6 @@ var rBot = {
 		listUser: {},
 		listDc: {}
 	},
-	cohost_cmd: {
-
-	},
 	manager_cmd: {
 		move: function(un, unt, position){
 			var u = API.getUsers();
@@ -120,6 +117,19 @@ var rBot = {
 					API.moderateBanUser(id, 1, API.BAN.HOUR);
 				}
 			}
+		},
+		grab: function(un){
+			API.sendChat('[!grab] [' + un + '] a ajouté une musique dans ma playlist !');
+			$("#grab").click();
+			$($(".pop-menu.grab").children(".menu").children().children()[0]).mousedown();
+		},
+		join: function(un){
+			API.sendChat('[!join] [' + un + '] m\'a ajouté dans la waitlist !');
+			API.djJoin();
+		},
+		leave: function(un){
+			API.sendChat('[!leave] [' + un + '] m\'a retiré dans la waitlist !');
+			API.djLeave();
 		}
 	},
 	bouncer_cmd: {
@@ -246,8 +256,8 @@ var rBot = {
 		emoji: function(un){
 			API.sendChat('[!emoji] [' + un + '] Voici la liste des smileys : http://goo.gl/AKDkeo');
 		},
-		commands: function(un){
-			API.sendChat('[!commands] [' + un + '] Voici la liste des commandes : http://goo.gl/t43eFj');
+		help: function(un){
+			API.sendChat('[!help] [' + un + '] Voici la liste des commandes : http://goo.gl/t43eFj');
 		},
 		adblock: function(un){
 			API.sendChat('[!adblock] [' + un + '] Voici l\'add-on adblock qui vous permet de bloquer les publicités ! https://adblockplus.org/fr/');
@@ -351,7 +361,7 @@ var rBot = {
 						rBot.deleteChat(data.cid);
 						rBot.user_cmd.emoji(data.un);
 						break;
-					case '!commands':
+					case '!help':
 						rBot.deleteChat(data.cid);
 						rBot.user_cmd.commands(data.un);
 						break;
@@ -505,21 +515,26 @@ var rBot = {
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.ban(data.un, attr);
 						} else { rBot.deleteChat(data.cid); }
+					case '!grab':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.grab(data.un);
+						} else { rBot.deleteChat(data.cid); }
+					case '!join':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.join(data.un);
+						} else { rBot.deleteChat(data.cid); }
+					case '!leave':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.leave(data.un);
+						} else { rBot.deleteChat(data.cid); }
 					break;
 
 					default:
 						rBot.deleteChat(data.cid);
 						break;
-				}
-			}
-			else if(data.message.indexOf('@') !=-1){
-				for(var i in rBot.users.getUser()){
-					if(data.message.indexOf(rBot.users.getUser(i).username)!=-1){
-						user = rBot.users.getUser(i);
-						if(user.afk){
-							API.sendChat('[' + user.username + '] est actuellement inactif !');
-						}
-					}
 				}
 			}
 		});
