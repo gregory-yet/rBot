@@ -500,40 +500,46 @@ var rBot = {
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.kill(data.un);
 						} else { rBot.deleteChat(data.cid); }
+						break;
 					case '!reload':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.reload(data.un);
 						} else { rBot.deleteChat(data.cid); }
+						break
 					case '!clearchat':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.clearchat(data.un);
 						} else { rBot.deleteChat(data.cid); }
+						break;
 					case '!ban':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.ban(data.un, attr);
 						} else { rBot.deleteChat(data.cid); }
+						break;
 					case '!grab':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							// rBot.manager_cmd.grab(data.un);
-							API.chatLog('!grab');
+							API.chatLog(':!grab');
 						} else { rBot.deleteChat(data.cid); }
+						break;
 					case '!join':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							// rBot.manager_cmd.join(data.un);
-							API.chatLog('!join');
+							API.chatLog(':!join');
 						} else { rBot.deleteChat(data.cid); }
+						break;
 					case '!leave':
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							// rBot.manager_cmd.leave(data.un);
-							API.chatLog('!leave');
+							API.chatLog(':!leave');
 						} else { rBot.deleteChat(data.cid); }
-					break;
+						break:
 
 					default:
 						rBot.deleteChat(data.cid);
