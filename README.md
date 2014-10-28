@@ -55,6 +55,9 @@ __!kill__ | _Aucun_ | Désactive le bot | Manager
 __!reload__ | _Aucun_ | Recharge le bot | Manager
 __!clearchat__ | _Aucun_ | Supprime tout les messages du chat | Manager
 __!ban__ | _Utilisateur_ | Ban la personne | Manager
+__!grab__ | _Aucun_ | Ajoute la musique actuelle à la playlist du bot | Manager
+__!join__ | _Aucun_ | Ajoute le bot dans la waitlist | Manager
+__!leave__ | _Aucun_ | Retire le bot de la waitlist | Manager
 
 License
 ----
