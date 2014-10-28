@@ -107,17 +107,6 @@ var rBot = {
 			}
 			API.sendChat('[!clearchat] [' + un + '] a supprimé tout les messages du chat ! :warning:');
 		},
-		ban: function(un, unt){
-			var u = API.getUsers();
-			for(var i in u){
-				if(u[i].username == unt){
-					var username = u[i].username;
-					var id = u[i].id;
-					API.sendChat('[!mute] [' + un + '] a mute ' + username + ' pendant 15 minutes !');
-					API.moderateBanUser(id, 1, API.BAN.HOUR);
-				}
-			}
-		},
 		grab: function(un){
 			API.sendChat('[!grab] [' + un + '] a ajouté une musique dans ma playlist !');
 			$("#grab").click();
@@ -222,6 +211,22 @@ var rBot = {
 
 					var time = hours + "h:" + minutes + "m:" + seconds + "s";
 					API.sendChat('[!jointime] [' + un + '] L\'utilisateur ' + unt + ' est connecté depuis ' + time);
+				}
+			}
+		},
+		ban: function(un, id, unt){
+			var u = API.getUsers();
+			for(var i in u){
+				if(u[i].username == unt){
+					if(API.getUser(u[i].id).role < API.getUser(id).role){
+						var username = u[i].username;
+						var idt = u[i].id;
+						API.sendChat('[!ban] [' + un + '] a ban ' + username + ' pendant 1 heure !');
+						API.moderateBanUser(idt, 1, API.BAN.HOUR);
+					}
+					else {
+						API.sendCHat('[!ban] [' + un + '] Tu n\'as pas les droits requis pour ban ' + u[i].username + ' !')
+					}
 				}
 			}
 		}
@@ -487,6 +492,18 @@ var rBot = {
 							rBot.bouncer_cmd.jointime(data.un, attr);
 						} else { rBot.deleteChat(data.cid); }
 						break;
+					case '!ban':
+						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.ban(data.un, data.uid, attr);
+						} else { rBot.deleteChat(data.cid); }
+						break;
+					case '!bot':
+						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.bot(data.un, attr);
+						} else { rBot.deleteChat(data.cid); }
+						break;
 
 					// manager_cmd
 					case '!move':
@@ -511,12 +528,6 @@ var rBot = {
 						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
 							rBot.deleteChat(data.cid);
 							rBot.manager_cmd.clearchat(data.un);
-						} else { rBot.deleteChat(data.cid); }
-						break;
-					case '!ban':
-						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
-							rBot.deleteChat(data.cid);
-							rBot.manager_cmd.ban(data.un, attr);
 						} else { rBot.deleteChat(data.cid); }
 						break;
 					case '!grab':
