@@ -363,7 +363,7 @@ var rBot = {
 						break;
 					case '!help':
 						rBot.deleteChat(data.cid);
-						rBot.user_cmd.commands(data.un);
+						rBot.user_cmd.help(data.un);
 						break;
 					case '!adblock':
 						rBot.deleteChat(data.cid);
