@@ -498,12 +498,6 @@ var rBot = {
 							rBot.bouncer_cmd.ban(data.un, data.uid, attr);
 						} else { rBot.deleteChat(data.cid); }
 						break;
-					case '!bot':
-						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
-							rBot.deleteChat(data.cid);
-							rBot.manager_cmd.bot(data.un, attr);
-						} else { rBot.deleteChat(data.cid); }
-						break;
 
 					// manager_cmd
 					case '!move':
@@ -548,7 +542,13 @@ var rBot = {
 							rBot.manager_cmd.leave(data.un);
 						} else { rBot.deleteChat(data.cid); }
 						break;
-
+					case '!bot':
+						if(API.hasPermission(data.uid, API.ROLE.BOUNCER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.bot(data.un, attr);
+						} else { rBot.deleteChat(data.cid); }
+						break;
+						
 					default:
 						rBot.deleteChat(data.cid);
 						break;
