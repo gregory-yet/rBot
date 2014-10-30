@@ -355,7 +355,7 @@ var rBot = {
 					if(API.getWaitListPosition(u[i].id) !== -1){
 						var username = u[i].username;
 						var id = u[i].id;
-						API.sendChat('[!eta] [' + un + '] Il vous reste environ ' + Math.floor(API.getMedia().duration * 0.017) * API.getWaitListPosition(id) + ' minutes à attendre pour être le dj !');
+						API.sendChat('[!eta] [' + un + '] Il vous reste environ ' + Math.floor(API.getMedia().duration * 0.017) * (API.getWaitListPosition(id) + 1) + ' minutes à attendre pour être le dj !');
 					}
 					else {
 						API.sendChat('[!eta] [' + un + '] Vous n\'êtes pas dans la waitlist !');
