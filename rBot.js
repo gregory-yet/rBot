@@ -21,6 +21,19 @@ SOFTWARE.
 */
 
 var rBot = {
+	settings: {
+		timeguard: {
+			valid: true,
+			time: 438
+		},
+		lottery: {
+			valid: false,
+			winner: {
+				username: undefined,
+				id: undefined
+			}
+		}
+	},
 	users: {
 		newUser: function(id, username){
 			this.id = id;
@@ -121,7 +134,27 @@ var rBot = {
 			API.djLeave();
 		},
 		bot: function(un, message){
+
 			API.sendChat('[!bot] [' + un + '] :warning: ' + message + ' :warning:');
+		},
+		timeguard: function(un){
+			rBot.settings.timeguard.valid = !rBot.settings.timeguard.valid;
+			var str = rBot.settings.timeguard.valid ? "activé" : "désactivé";
+			API.sendChat('[!timeguard] [' + un + '] a ' + str + ' timeguard !');
+		},
+		lottery: function(un){
+			var alea = Math.floor((API.getWaitList().length)*Math.random());
+			var num = (API.getWaitList().length > 3 && alea <= 2) ? alea+2 : alea;
+			var u = API.getWaitList();
+			for(var i in u){
+				if(API.getWaitListPosition(u[i].id) === num){
+					API.sendChat('[!lotwin] [' + un + '] @' + u[i].username + ' a gagné la loterie ! Tapez !loterie pour remporter le boost !');
+					rBot.settings.lottery.winner.username = u[i].username;
+					rBot.settings.lottery.winner.id = u[i].id;
+					rBot.settings.lottery.valid = true;
+					setTimeout(function(){rBot.settings.lottery.valid = false;}, 300000);
+				}
+			}
 		}
 	},
 	bouncer_cmd: {
@@ -228,7 +261,7 @@ var rBot = {
 						API.moderateBanUser(idt, 1, API.BAN.HOUR);
 					}
 					else {
-						API.sendChat('[!ban] [' + un + '] Tu n\'as pas les droits requis pour ban ' + u[i].username + ' !')
+						API.sendChat('[!ban] [' + un + '] Vous n\'avez pas les droits requis pour ban ' + u[i].username + ' !')
 					}
 				}
 			}
@@ -302,11 +335,11 @@ var rBot = {
 					rBot.users.listDc[id].valid = false;
 				}
 				else {
-					API.sendChat('[!dc] [' + un + '] Tu es déconnecté depuis trop longtemps ou bien tu n\'étais pas dans la waitlist');
+					API.sendChat('[!dc] [' + un + '] Vous êtes déconnecté depuis trop longtemps ou bien vous n\'étiez pas dans la waitlist');
 				}
 			}
 			else{
-				API.sendChat('[!dc] [' + un + '] Je ne t\'ai pas vu te déconnecter !');
+				API.sendChat('[!dc] [' + un + '] Je ne vous ai pas vu vous déconnecter !');
 			}
 		},
 		cookie: function(un, unt){
@@ -322,12 +355,29 @@ var rBot = {
 					if(API.getWaitListPosition(u[i].id) !== -1){
 						var username = u[i].username;
 						var id = u[i].id;
-						API.sendChat('[!eta] [' + un + '] Il te reste environ ' + Math.floor(API.getMedia().duration * 0.017) * API.getWaitListPosition(id) + ' minutes à attendre pour être le dj !');
+						API.sendChat('[!eta] [' + un + '] Il vous reste environ ' + Math.floor(API.getMedia().duration * 0.017) * API.getWaitListPosition(id) + ' minutes à attendre pour être le dj !');
 					}
 					else {
-						API.sendChat('[!eta] [' + un + '] Tu n\'es pas dans la waitlist !');
+						API.sendChat('[!eta] [' + un + '] Vous n\'êtes pas dans la waitlist !');
 					}
 				}
+			}
+		},
+		loterie: function(un){
+			if(rBot.settings.lottery.valid){
+				if(rBot.settings.lottery.winner.username == un){
+					var id = rBot.settings.lottery.winner.id;
+					API.sendChat('[!loterie] [' + un + '] Bravo, Vous avez gagné la loterie, vous allez être boosté 2ème de la waitlist !');
+					rBot.settings.lottery.valid = false;
+					API.moderateAddDJ(id);
+					setTimeout(function(){API.moderateMoveDJ(id, 2);}, 500);
+				}
+				else {
+					API.sendChat('[!loterie] [' + un + '] Vous n\'avez pas gagné la loterie !');
+				}
+			}
+			else {
+				API.sendChat('[!loterie] [' + un + '] La loterie a expiré ou n\'a pas été lancé !');
 			}
 		}
 	},
@@ -404,6 +454,10 @@ var rBot = {
 					case '!eta':
 						rBot.deleteChat(data.cid);
 						rBot.user_cmd.eta(data.un);
+						break;
+					case '!loterie':
+						rBot.deleteChat(data.cid);
+						rBot.user_cmd.loterie(data.un);
 						break;
 
 
@@ -551,6 +605,18 @@ var rBot = {
 							rBot.manager_cmd.bot(data.un, attr);
 						} else { rBot.deleteChat(data.cid); }
 						break;
+					case '!timeguard':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.timeguard(data.un);
+						} else { rBot.deleteChat(data.cid); }
+						break;
+					case '!lotwin':
+						if(API.hasPermission(data.uid, API.ROLE.MANAGER)){
+							rBot.deleteChat(data.cid);
+							rBot.manager_cmd.lottery(data.un);
+						} else { rBot.deleteChat(data.cid); }
+						break;
 
 					default:
 						rBot.deleteChat(data.cid);
@@ -562,6 +628,12 @@ var rBot = {
 			var u = rBot.users.listUser;
 			for(var i in u){
 				u[i].wList = API.getWaitListPosition(u[i].id) == -1 ? API.getWaitListPosition(u[i].id) : API.getWaitListPosition(u[i].id) + 1;
+			}
+			if(rBot.settings.timeguard.valid){
+				if(API.getMedia().duration > rBot.settings.timeguard.time){
+					API.sendChat(':warning: Musique trop longue, la limite est 7.30 minutes ! Auto-skip dans 7.30 minutes ! :warning:');
+					setTimeout(function(){API.moderateForceSkip();}, 438000);
+				}
 			}
 		});
 	},
