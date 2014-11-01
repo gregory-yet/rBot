@@ -286,10 +286,10 @@ var rBot = {
 	},
 	user_cmd: {
 		theme: function(un){
-			API.sendChat('[!theme] [' + un + '] Tout les styles de musiques sont autorisés sauf : La country, le troll, le classique et les sons à caractères racistes !');
+			API.sendChat('[!theme] [' + un + '] Tout les styles de musiques sont autorisés sauf : Country, Nightcore, Metal, Jumpstyle, Tekstyle, Hardcore, la musique Classique (chopin et autres) et les sons à caractères racistes !');
 		},
 		rules: function(un){
-			API.sendChat('[!rules] [' + un + '] Voici les règles à respecter : http://goo.gl/Arz6Ax');
+			API.sendChat('[!rules] [' + un + '] Voici les règles à respecter : http://goo.gl/uUeNVF');
 		},
 		op: function(un){
 			API.sendChat('[!op] [' + un + '] Voici la liste des musiques interdites : http://goo.gl/eiRdQK');
